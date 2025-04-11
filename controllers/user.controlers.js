@@ -1,8 +1,14 @@
-export const singnup = (req, res) => {
-    try{
-        return res.status(200).send('successfully create')
-    }catch(error){
+const User = require('../models/user.model');
+
+const singnup = (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+
+    } catch (error) {
         console.log(error);
         return res.status(500).send('Error in Singup')
     }
 }
+
+module.exports = { singnup }
