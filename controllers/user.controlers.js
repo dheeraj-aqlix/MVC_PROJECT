@@ -3,9 +3,11 @@ const { bycryptCompare, bycryptHash, jwtSign, verify } = require('../utils/helpe
 const singnup = async (req, res) => {
     try {
         const { email, password } = req.body;
-        if (!email && !password) {
-            return res.status(400).send("Email and password is compulsary");
+        console.log('req.file',req.file)
+        if (!email && !password && req.file) {
+            return res.status(400).send("Email, password and file  is compulsary");
         }
+        req.body.profilepic = req.file ? `/uploads/${req.file.filename}` : null
         const alreadyUser = await User.findOne({ email })
         if (alreadyUser) {
             return res.status(403).send("Email Already exist");
